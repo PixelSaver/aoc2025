@@ -1,4 +1,5 @@
 use aoc2025::AdventDay;
+use std::env;
 
 struct Day01;
 
@@ -13,5 +14,6 @@ impl AdventDay for Day01 {
 }
 
 fn main() {
-    Day01.run("inputs/day01.txt");
+    let input_file = env::args().nth(1).unwrap_or("inputs/day01.txt".into());
+    Day01.run(&input_file);
 }
