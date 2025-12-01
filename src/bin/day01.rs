@@ -1,19 +1,22 @@
 use aoc2025::AdventDay;
-use std::env;
+use aoc2025::input_for;
+
+include!("../infer_day.rs");
 
 struct Day01;
 
 impl AdventDay for Day01 {
-    fn part1(&self, input:&str) -> String {
+    fn part1(&self, input: &str) -> String {
         // Boilerplate code
         input.lines().count().to_string()
     }
-    fn part2(&self, input:&str) -> String {
+    fn part2(&self, input: &str) -> String {
         input.lines().count().to_string()
     }
 }
 
 fn main() {
-    let input_file = env::args().nth(1).unwrap_or("inputs/day01.txt".into());
-    Day01.run(&input_file);
+    let day = infer_day!();
+
+    Day01.run(&input_for(day));
 }
