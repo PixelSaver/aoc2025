@@ -75,7 +75,6 @@ impl AdventDay for Day01 {
                 curr_dial, addendum, zero_passes
             );
             counter += zero_passes;
-            counter += if dial == 0 { 1 } else { 0 };
         }
 
         counter.to_string()
@@ -86,30 +85,43 @@ impl Day01 {
     /// Adds addendum to dial
     /// Also returns a bool as to whether it passed 0
     fn passed_zero(&self, dial: &mut i32, addendum: i32) -> u32 {
-        *dial += addendum;
-        let before_wrap = *dial;
-        // while *dial < 0 {
-        //     *dial += 100;
-        //     if *dial != 0 {
-        //         zero_passes += 1;
-        //     }
-        // }
-        // while *dial > 99 {
-        //     *dial -= 100;
-        //     if *dial != 0 {
-        //         zero_passes += 1;
-        //     }
-        // }
-        *dial = (*dial).rem_euclid(100);
-        let zero_passes = if before_wrap == 0 {
-            0
-        } else if before_wrap > 0 {
-            (before_wrap.div_euclid(100)) as u32
+        let start = *dial;
+        let distance = addendum.abs();
+
+        let mut count = 0;
+
+        if addendum > 0 {
+            // 100-start, 200-start, 300-start, etc.
+            // First zero at: (100 - start) clicks from start
+            // Then every 100 clicks after that
+
+            if start == 0 {
+                // Starting at 0, we hit it again every 100 clicks
+                count = (distance / 100) as u32;
+            } else {
+                let first_zero = 100 - start;
+                if distance >= first_zero {
+                    count = 1 + ((distance - first_zero) / 100) as u32;
+                }
+            }
         } else {
-            ((-before_wrap).div_euclid(100) + 1) as u32
-        };
-        zero_passes
-    }
+            // start, start+100, start+200, etc. clicks backward
+
+            if start == 0 {
+                // Starting at 0, we hit it again every 100 clicks
+                count = (distance / 100) as u32;
+            } else {
+                let first_zero = start;
+                if distance >= first_zero {
+                    count = 1 + ((distance - first_zero) / 100) as u32;
+                }
+            }
+        }
+
+        *dial = (start + addendum).rem_euclid(100);
+
+        count
+    } 
 }
 
 fn main() {
