@@ -105,6 +105,7 @@ impl AdventDay for Day03 {
 #[cfg(test)]
 mod tests {
     use super::Day03;
+    use crate::AdventDay;
     use crate::find_existing_example;
     use std::fs;
 
