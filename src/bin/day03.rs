@@ -1,6 +1,4 @@
 use aoc2025::AdventDay;
-use aoc2025::input_for;
-use std::env;
 
 include!("../infer_day.rs");
 
@@ -18,12 +16,12 @@ impl Bank {
     fn max_joltage(&self, bank: &str) -> u64 {
         let chars: Vec<char> = bank.chars().collect();
         let n = chars.len();
-    
+
         let mut max_val = 0;
-    
+
         for i in 0..n {
             if let Some(d1) = chars[i].to_digit(10) {
-                for j in i+1..n {
+                for j in i + 1..n {
                     if let Some(d2) = chars[j].to_digit(10) {
                         let val = d1 * 10 + d2;
                         if val > max_val {
@@ -33,18 +31,15 @@ impl Bank {
                 }
             }
         }
-    
+
         max_val as u64
     }
     fn max_joltage_k(&self, bank: &str, k: usize) -> u64 {
-        let digits: Vec<u32> = bank
-            .chars()
-            .filter_map(|c| c.to_digit(10))
-            .collect();
-    
+        let digits: Vec<u32> = bank.chars().filter_map(|c| c.to_digit(10)).collect();
+
         let n = digits.len();
         let mut stack: Vec<u32> = Vec::new();
-    
+
         for (i, &d) in digits.iter().enumerate() {
             // While the current digit is bigger than the last in stack,
             // and we can still fill enough digits to reach k
@@ -55,12 +50,12 @@ impl Bank {
                     break;
                 }
             }
-    
+
             if stack.len() < k {
                 stack.push(d);
             }
         }
-    
+
         // Convert the stack of digits into a number
         stack.iter().fold(0, |acc, &d| acc * 10 + d as u64)
     }
@@ -93,13 +88,4 @@ impl AdventDay for Day03 {
 
 impl Day03 {}
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let day = infer_day!();
-
-    if args.len() > 1 {
-        Day03.run(&args[1])
-    } else {
-        Day03.run(&input_for(day));
-    }
-}
+aoc2025::advent_main!(Day03);

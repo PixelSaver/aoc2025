@@ -1,6 +1,4 @@
 use aoc2025::AdventDay;
-use aoc2025::input_for;
-use std::env;
 
 include!("../infer_day.rs");
 
@@ -121,16 +119,7 @@ impl Day01 {
         *dial = (start + addendum).rem_euclid(100);
 
         count
-    } 
-}
-
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let day = infer_day!();
-
-    if args.len() > 1 {
-        Day01.run(&args[1])
-    } else {
-        Day01.run(&input_for(day));
     }
 }
+
+aoc2025::advent_main!(Day01);

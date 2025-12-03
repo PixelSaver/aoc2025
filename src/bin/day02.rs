@@ -1,6 +1,4 @@
 use aoc2025::AdventDay;
-use aoc2025::input_for;
-use std::env;
 
 include!("../infer_day.rs");
 
@@ -70,7 +68,7 @@ impl Day02 {
     fn is_invalid_id_p2(&self, num: u64) -> bool {
         let s = num.to_string();
         let n = s.len() as u32;
-        
+
         for repeat in 2..=n {
             if self.check_repeat(&s, repeat) {
                 // println!("Invalid id: {}", num);
@@ -103,13 +101,4 @@ impl Day02 {
     }
 }
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let day = infer_day!();
-
-    if args.len() > 1 {
-        Day02.run(&args[1])
-    } else {
-        Day02.run(&input_for(day));
-    }
-}
+aoc2025::advent_main!(Day02);
