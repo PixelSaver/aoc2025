@@ -2,6 +2,8 @@ use std::io;
 use std::process::Command;
 use std::time::Instant;
 
+pub mod days;
+
 /// The AdventDay trait - implement this for each day's solution.
 ///
 /// Provides two small helpers in addition to `part1`/`part2`:
