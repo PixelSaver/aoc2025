@@ -1,6 +1,6 @@
 use aoc2025::AdventDay;
 use aoc2025::{
-    days::{Day01, Day02, Day03},
+    days::{Day01, Day02, Day03, Day04},
     find_existing_example,
 };
 use std::fs;
@@ -70,5 +70,24 @@ fn day03_example_matches_expected() {
     assert_eq!(
         p2, "3121910778619",
         "Day03 part2 did not match expected example answer"
+    );
+}
+
+#[test]
+fn day04_example_matches_expected() {
+    let example_path = find_existing_example(4).expect("No example found for day 4");
+    let input = fs::read_to_string(&example_path).expect("Failed to read day4 example file");
+
+    let day = Day04::default();
+    let p1 = day.part1(&input);
+    let p2 = day.part2(&input);
+
+    assert_eq!(
+        p1, "13",
+        "Day04 part1 did not match expected example answer"
+    );
+    assert_eq!(
+        p2, "3121910778619",
+        "Day04 part2 did not match expected example answer"
     );
 }
