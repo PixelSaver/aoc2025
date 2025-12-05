@@ -75,7 +75,7 @@ impl AdventDay for Day04 {
             return "0".to_string();
         }
         let mut counter = 0;
-        while true {
+        loop {
             let num = self.clear_rolls(&mut grid);
             counter += num;
             if num == 0 {
