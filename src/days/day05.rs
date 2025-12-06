@@ -1,5 +1,4 @@
 use crate::AdventDay;
-use std::collections::HashSet;
 
 /// Library implementation for Day04.
 ///
